@@ -1,0 +1,7 @@
+[
+  {
+    "remarks": "All traffic direct",
+    "port": "0-65535",
+    "outboundTag": "direct"
+  }
+]

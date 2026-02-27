@@ -1,0 +1,118 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Checkout fork
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        submodules: 'recursive'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Configure git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Add upstream remote
+      run: |
+        git remote add upstream https://github.com/2dust/v2rayNG.git || true
+        git fetch upstream --tags
+
+    - name: Check for new upstream release
+      id: check
+      run: |
+        # Get latest upstream tag
+        UPSTREAM_TAG=$(gh api repos/2dust/v2rayNG/releases --jq '.[0].tag_name')
+        echo "upstream_tag=$UPSTREAM_TAG" >> $GITHUB_OUTPUT
+
+        # Get stored base version
+        if [ -f .upstream-version ]; then
+          CURRENT_BASE=$(cat .upstream-version)
+        else
+          CURRENT_BASE="none"
+        fi
+        echo "current_base=$CURRENT_BASE" >> $GITHUB_OUTPUT
+
+        if [ "$UPSTREAM_TAG" != "$CURRENT_BASE" ]; then
+          echo "has_update=true" >> $GITHUB_OUTPUT
+          echo "New upstream version: $UPSTREAM_TAG (current base: $CURRENT_BASE)"
+        else
+          echo "has_update=false" >> $GITHUB_OUTPUT
+          echo "Already up to date with upstream $CURRENT_BASE"
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create sync branch and merge
+      if: steps.check.outputs.has_update == 'true'
+      id: merge
+      run: |
+        UPSTREAM_TAG="${{ steps.check.outputs.upstream_tag }}"
+        BRANCH="sync/upstream-${UPSTREAM_TAG}"
+
+        # Check if branch already exists
+        if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+          echo "Branch $BRANCH already exists, skipping"
+          echo "skip=true" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
+        # Create sync branch from current master
+        git checkout -b "$BRANCH"
+
+        # Try to merge upstream tag
+        if git merge "$UPSTREAM_TAG" --no-edit -m "Merge upstream v2rayNG $UPSTREAM_TAG"; then
+          echo "merge_clean=true" >> $GITHUB_OUTPUT
+        else
+          # If conflicts, commit what we can and note the conflicts
+          git add -A
+          git commit -m "Merge upstream v2rayNG $UPSTREAM_TAG (has conflicts)" --no-verify || true
+          echo "merge_clean=false" >> $GITHUB_OUTPUT
+        fi
+
+        # Update the base version tracker
+        echo "$UPSTREAM_TAG" > .upstream-version
+        git add .upstream-version
+        git commit -m "Update upstream base version to $UPSTREAM_TAG" --no-verify || true
+
+        # Push the branch
+        git push origin "$BRANCH"
+        echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+        echo "skip=false" >> $GITHUB_OUTPUT
+
+    - name: Create Pull Request
+      if: steps.check.outputs.has_update == 'true' && steps.merge.outputs.skip != 'true'
+      run: |
+        UPSTREAM_TAG="${{ steps.check.outputs.upstream_tag }}"
+        CURRENT_BASE="${{ steps.check.outputs.current_base }}"
+        BRANCH="${{ steps.merge.outputs.branch }}"
+        CLEAN="${{ steps.merge.outputs.merge_clean }}"
+
+        if [ "$CLEAN" = "true" ]; then
+          BODY="Upstream v2rayNG released **${UPSTREAM_TAG}**.\n\nThis PR merges the upstream changes into our fork.\nMerge was clean - no conflicts detected.\n\nAfter merging, bump the fork version and create a new release."
+        else
+          BODY="Upstream v2rayNG released **${UPSTREAM_TAG}**.\n\nThis PR merges the upstream changes but has **merge conflicts** that need manual resolution.\nPlease review and resolve conflicts before merging.\n\nAfter merging, bump the fork version and create a new release."
+        fi
+
+        gh pr create \
+          --title "Sync upstream v2rayNG ${UPSTREAM_TAG}" \
+          --body "$(echo -e "$BODY")" \
+          --base master \
+          --head "$BRANCH" \
+          --label "upstream-sync" || echo "PR may already exist"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
