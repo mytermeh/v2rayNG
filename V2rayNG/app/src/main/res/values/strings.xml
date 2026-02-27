@@ -155,99 +155,98 @@
 
     <!-- Preferences -->
     <string name="title_settings">Settings</string>
-    <string name="title_advanced">Advanced Settings</string>
-    <string name="title_core_settings">Core Settings</string>
-    <string name="title_vpn_settings">VPN Settings</string>
+    <string name="title_advanced">Advanced</string>
+    <string name="title_core_settings">Core</string>
+    <string name="title_vpn_settings">VPN</string>
     <string name="title_pref_per_app_proxy">Per-app proxy</string>
     <string name="summary_pref_per_app_proxy">General: Checked apps use proxy, unchecked apps connect directly; \nBypass mode: checked apps connect directly, unchecked apps use proxy. \nThe option to automatically select proxy applications is in the menu</string>
-    <string name="title_pref_is_booted">Auto connect at startup</string>
-    <string name="summary_pref_is_booted">Automatically connects to the selected server at startup, which may be unsuccessful</string>
+    <string name="title_pref_is_booted">Auto-connect on boot</string>
+    <string name="summary_pref_is_booted">Automatically connect to the last selected server on startup</string>
 
-    <string name="title_pref_auto_remove_invalid_after_test">Auto delete invalid config after testing</string>
-    <string name="summary_pref_auto_remove_invalid_after_test">Test results may not be accurate; deleted config cannot be recovered.</string>
-    <string name="title_pref_auto_sort_after_test">Auto sort after testing</string>
-    <string name="summary_pref_auto_sort_after_test">Test results may not be accurate;</string>
+    <string name="title_pref_auto_remove_invalid_after_test">Remove invalid configs after test</string>
+    <string name="summary_pref_auto_remove_invalid_after_test">Automatically delete configs that fail latency tests. Removed configs cannot be recovered.</string>
+    <string name="title_pref_auto_sort_after_test">Sort by latency after test</string>
+    <string name="summary_pref_auto_sort_after_test">Automatically sort configs from fastest to slowest after testing</string>
 
-    <string name="title_mux_settings">Mux Settings</string>
+    <string name="title_mux_settings">Mux</string>
     <string name="title_pref_mux_enabled">Enable Mux</string>
-    <string name="summary_pref_mux_enabled">Faster, but it may cause unstable connectivity\nCustomize how to handle TCP, UDP and QUIC below</string>
-    <string name="title_pref_mux_concurency">TCP connections（range -1 to 1024）</string>
-    <string name="title_pref_mux_xudp_concurency">XUDP connections（range -1 to 1024）</string>
-    <string name="title_pref_mux_xudp_quic">Handling of QUIC in mux tunnel</string>
+    <string name="summary_pref_mux_enabled">Multiplex multiple streams over a single connection. May improve speed, but can cause instability on some servers.</string>
+    <string name="title_pref_mux_concurency">TCP concurrency (-1 to 1024)</string>
+    <string name="title_pref_mux_xudp_concurency">XUDP concurrency (-1 to 1024)</string>
+    <string name="title_pref_mux_xudp_quic">QUIC handling in mux</string>
     <string-array name="mux_xudp_quic_entries">
         <item>reject</item>
         <item>allow</item>
         <item>skip</item>
     </string-array>
 
-    <string name="title_pref_speed_enabled">Enable speed display</string>
-    <string name="summary_pref_speed_enabled">Display current speed in the notification.\nNotification icon would change based on
-        usage.</string>
+    <string name="title_pref_speed_enabled">Show speed in notification</string>
+    <string name="summary_pref_speed_enabled">Display real-time upload/download speed in the notification bar</string>
 
-    <string name="title_pref_sniffing_enabled">Enable Sniffing</string>
-    <string name="summary_pref_sniffing_enabled">Try sniff domain from the packet (default on)</string>
-    <string name="title_pref_route_only_enabled">Enable routeOnly</string>
-    <string name="summary_pref_route_only_enabled">Use the sniffed domain name for routing only, and keep the target address as the IP address.</string>
+    <string name="title_pref_sniffing_enabled">Enable sniffing</string>
+    <string name="summary_pref_sniffing_enabled">Detect the domain name from packet data for more accurate routing</string>
+    <string name="title_pref_route_only_enabled">Route-only sniffing</string>
+    <string name="summary_pref_route_only_enabled">Use sniffed domain for routing decisions only, without overriding the actual connection target</string>
 
-    <string name="title_pref_local_dns_enabled">Enable local DNS</string>
-    <string name="summary_pref_local_dns_enabled">DNS processed by core‘s DNS module (Recommended if you need routing bypassing LAN and mainland addresses)</string>
+    <string name="title_pref_local_dns_enabled">Local DNS</string>
+    <string name="summary_pref_local_dns_enabled">Route DNS queries through the core’s DNS module. Recommended for accurate LAN and geo-based routing.</string>
 
-    <string name="title_pref_fake_dns_enabled">Enable fake DNS</string>
-    <string name="summary_pref_fake_dns_enabled">Local DNS returns fake IP addresses (faster, but it may not work for some apps)</string>
+    <string name="title_pref_fake_dns_enabled">Fake DNS</string>
+    <string name="summary_pref_fake_dns_enabled">Return fake IP addresses for DNS queries to improve performance. May not be compatible with all apps.</string>
 
     <string name="title_pref_prefer_ipv6">Prefer IPv6</string>
-    <string name="summary_pref_prefer_ipv6">Enable IPv6 routes and Prefer IPv6 addresses</string>
+    <string name="summary_pref_prefer_ipv6">Enable IPv6 routes and prefer IPv6 addresses when both are available</string>
 
-    <string name="title_pref_remote_dns">Remote DNS (udp/tcp/https/quic)(Optional)</string>
-    <string name="summary_pref_remote_dns">DNS</string>
+    <string name="title_pref_remote_dns">Remote DNS</string>
+    <string name="summary_pref_remote_dns">DNS server for proxied traffic (udp/tcp/https/quic). Leave empty for default.</string>
 
-    <string name="title_pref_vpn_dns">VPN DNS (only IPv4/v6)</string>
-    <string name="title_pref_vpn_bypass_lan">Does VPN bypass LAN</string>
+    <string name="title_pref_vpn_dns">VPN DNS</string>
+    <string name="title_pref_vpn_bypass_lan">Bypass LAN</string>
 
-    <string name="title_pref_vpn_interface_address">VPN Interface Address</string>
+    <string name="title_pref_vpn_interface_address">VPN interface address</string>
 
-    <string name="title_pref_vpn_mtu">VPN MTU (default 1500)</string>
+    <string name="title_pref_vpn_mtu">MTU</string>
 
 
-    <string name="title_pref_domestic_dns">Domestic DNS (Optional)</string>
-    <string name="summary_pref_domestic_dns">DNS</string>
+    <string name="title_pref_domestic_dns">Domestic DNS</string>
+    <string name="summary_pref_domestic_dns">DNS server for direct (non-proxied) traffic. Leave empty to use system default.</string>
 
-    <string name="title_pref_dns_hosts">DNS hosts (Format: domain:address,…)</string>
-    <string name="summary_pref_dns_hosts">domain:address,…</string>
+    <string name="title_pref_dns_hosts">DNS hosts</string>
+    <string name="summary_pref_dns_hosts">Static DNS overrides in domain:address format, comma-separated</string>
 
-    <string name="title_pref_delay_test_url">True delay test url </string>
-    <string name="summary_pref_delay_test_url">Url</string>
+    <string name="title_pref_delay_test_url">Latency test URL</string>
+    <string name="summary_pref_delay_test_url">URL used to measure connection latency</string>
 
-    <string name="title_pref_ip_api_url">Current connection info test url</string>
-    <string name="summary_pref_ip_api_url">Url</string>
+    <string name="title_pref_ip_api_url">IP info URL</string>
+    <string name="summary_pref_ip_api_url">URL used to retrieve current connection and IP information</string>
 
-    <string name="title_pref_proxy_sharing_enabled">Allow connections from the LAN</string>
-    <string name="summary_pref_proxy_sharing_enabled">Other devices can connect to proxy by your IP address through local proxy. Only enable in trusted networks to avoid unauthorized connections</string>
-    <string name="toast_warning_pref_proxysharing_short">Allow connections from the LAN. Make sure you are in a trusted network</string>
+    <string name="title_pref_proxy_sharing_enabled">LAN access</string>
+    <string name="summary_pref_proxy_sharing_enabled">Allow other devices on the local network to use this device as a proxy. Only enable on trusted networks.</string>
+    <string name="toast_warning_pref_proxysharing_short">LAN access enabled. Ensure you are on a trusted network.</string>
 
-    <string name="title_pref_allow_insecure">allowInsecure</string>
-    <string name="summary_pref_allow_insecure">When TLS is selected, allow insecure connections by default</string>
+    <string name="title_pref_allow_insecure">Allow insecure TLS</string>
+    <string name="summary_pref_allow_insecure">Skip TLS certificate verification. Not recommended unless required by your server.</string>
 
-    <string name="title_pref_socks_port">Local proxy port</string>
-    <string name="summary_pref_socks_port">Local proxy port</string>
+    <string name="title_pref_socks_port">Local SOCKS port</string>
+    <string name="summary_pref_socks_port">Local proxy port (SOCKS5). HTTP proxy is at this port + 1.</string>
 
     <string name="title_pref_local_dns_port">Local DNS port</string>
-    <string name="summary_pref_local_dns_port">Local DNS port</string>
+    <string name="summary_pref_local_dns_port">Port used by the local DNS resolver</string>
 
-    <string name="title_pref_confirm_remove">Delete config confirmation</string>
-    <string name="summary_pref_confirm_remove">Whether deleting a config requires a second confirmation by the user</string>
+    <string name="title_pref_confirm_remove">Confirm before deleting</string>
+    <string name="summary_pref_confirm_remove">Show a confirmation dialog before removing a config</string>
 
-    <string name="title_pref_start_scan_immediate">Start scanning immediately</string>
-    <string name="summary_pref_start_scan_immediate">Open the camera to scan immediately at startup, otherwise you can choose to scan the code or select a photo in the toolbar</string>
+    <string name="title_pref_start_scan_immediate">Instant QR scan</string>
+    <string name="summary_pref_start_scan_immediate">Open the camera immediately when the QR scan option is selected</string>
 
-    <string name="title_pref_append_http_proxy">Append HTTP Proxy to VPN</string>
-    <string name="summary_pref_append_http_proxy">HTTP proxy will be used directly from (browser/ some supported apps), without going through the virtual NIC device (Android 10+)</string>
+    <string name="title_pref_append_http_proxy">Expose HTTP proxy</string>
+    <string name="summary_pref_append_http_proxy">Make the local HTTP proxy accessible to apps that support it directly (Android 10+)</string>
 
-    <string name="title_pref_double_column_display">Enable double column display</string>
-    <string name="summary_pref_double_column_display">The profile list is displayed in double columns, allowing more content to be displayed on the screen. You need to restart the application to take effect.</string>
+    <string name="title_pref_double_column_display">Two-column layout</string>
+    <string name="summary_pref_double_column_display">Display the server list in two columns. Requires app restart to take effect.</string>
 
-    <string name="title_pref_group_all_display">Enable show all groups</string>
-    <string name="summary_pref_group_all_display">Add an extra "All Tabs" page</string>
+    <string name="title_pref_group_all_display">Show "All" tab</string>
+    <string name="summary_pref_group_all_display">Add an extra tab that lists configs from all subscription groups</string>
 
     <!-- AboutActivity -->
     <string name="title_pref_feedback">Feedback</string>
@@ -263,21 +262,21 @@
 
     <string name="title_pref_promotion">Promotion</string>
 
-    <string name="title_pref_auto_update_subscription">Automatic update subscriptions</string>
-    <string name="summary_pref_auto_update_subscription">Update your subscriptions automatically at set intervals in the background. Depending on the device, this feature may not always work</string>
-    <string name="title_pref_auto_update_interval">Auto Update Interval (Minutes, Min value 15)</string>
+    <string name="title_pref_auto_update_subscription">Auto-update subscriptions</string>
+    <string name="summary_pref_auto_update_subscription">Periodically refresh all subscription groups in the background</string>
+    <string name="title_pref_auto_update_interval">Update interval (minutes)</string>
 
-    <string name="title_core_loglevel">Log Level</string>
-    <string name="title_outbound_domain_resolve_method">Outbound domain pre-resolve method</string>
-    <string name="title_mode">Mode</string>
-    <string name="title_mode_help">Click me for more help</string>
+    <string name="title_core_loglevel">Core log level</string>
+    <string name="title_outbound_domain_resolve_method">Domain pre-resolve method</string>
+    <string name="title_mode">Proxy mode</string>
+    <string name="title_mode_help">Tap for help</string>
     <string name="title_language">Language</string>
-    <string name="title_ui_settings">UI settings</string>
-    <string name="title_pref_ui_mode_night">UI mode settings</string>
-    <string name="title_pref_use_hev_tunnel">Enable Hev TUN Feature</string>
-    <string name="summary_pref_use_hev_tunnel">When enabled, TUN will use hev-socks5-tunnel; otherwise, it will use xray-core.</string>
-    <string name="title_pref_hev_tunnel_loglevel">Hev Tun Log Level</string>
-    <string name="title_pref_hev_tunnel_rw_timeout">Hev Tun read/write timeout (seconds) (tcp,udp default 300,60)</string>
+    <string name="title_ui_settings">Appearance</string>
+    <string name="title_pref_ui_mode_night">Theme</string>
+    <string name="title_pref_use_hev_tunnel">Use hev-socks5-tunnel</string>
+    <string name="summary_pref_use_hev_tunnel">Use hev-socks5-tunnel for TUN mode instead of the xray-core built-in TUN</string>
+    <string name="title_pref_hev_tunnel_loglevel">hev-socks5-tunnel log level</string>
+    <string name="title_pref_hev_tunnel_rw_timeout">hev-socks5-tunnel read/write timeout</string>
 
     <string name="title_logcat">Logcat</string>
     <string name="logcat_copy">Copy</string>
@@ -287,7 +286,7 @@
     <string name="title_del_duplicate_config">Delete duplicate config</string>
     <string name="title_del_invalid_config">Delete invalid config</string>
     <string name="title_export_all">Export configs to clipboard</string>
-    <string name="title_sub_setting">Subscription group setting</string>
+    <string name="title_sub_setting">Subscriptions</string>
     <string name="sub_setting_remarks">remarks</string>
     <string name="sub_setting_url">Optional URL</string>
     <string name="sub_setting_user_agent">User Agent</string>
@@ -358,11 +357,11 @@
     <string name="sub_enable_label">Enable</string>
     <string name="sub_auto_update_label">Auto-update</string>
     <string name="import_subscription_failure">Import subscription failed</string>
-    <string name="title_fragment_settings">Fragment Settings</string>
-    <string name="title_pref_fragment_packets">Fragment Packets</string>
-    <string name="title_pref_fragment_length">Fragment Length (min-max)</string>
-    <string name="title_pref_fragment_interval">Fragment Interval (min-max)</string>
-    <string name="title_pref_fragment_enabled">Enable Fragment</string>
+    <string name="title_fragment_settings">Fragment</string>
+    <string name="title_pref_fragment_packets">Packet type</string>
+    <string name="title_pref_fragment_length">Length range (min-max)</string>
+    <string name="title_pref_fragment_interval">Interval range (min-max)</string>
+    <string name="title_pref_fragment_enabled">Enable fragment</string>
 
     <string name="update_check_for_update">Check for update</string>
     <string name="update_already_latest_version">Already on the latest version</string>
@@ -471,10 +470,10 @@
     <string name="routing_mode_applied">Routing mode: %s</string>
 
     <!-- Reset Settings -->
-    <string name="title_pref_reset_settings">Reset all settings</string>
-    <string name="summary_pref_reset_settings">Reset all settings to default values</string>
-    <string name="confirm_pref_reset_settings">Are you sure you want to reset all settings to default? This cannot be undone.</string>
-    <string name="toast_pref_reset_done">All settings have been reset</string>
+    <string name="title_pref_reset_settings">Reset to defaults</string>
+    <string name="summary_pref_reset_settings">Restore all settings to their default values</string>
+    <string name="confirm_pref_reset_settings">Reset all settings to default values? This action cannot be undone.</string>
+    <string name="toast_pref_reset_done">Settings reset to defaults</string>
 
     <!-- Rename Subscription -->
     <string name="dialog_rename_subscription">Rename Subscription</string>
