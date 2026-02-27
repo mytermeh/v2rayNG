@@ -12,8 +12,8 @@ android {
         applicationId = "com.v2ray.ang.tempereddev"
         minSdk = 24
         targetSdk = 36
-        versionCode = 18
-        versionName = "1.0.17"
+        versionCode = 19
+        versionName = "1.0.18"
         multiDexEnabled = true
 
         val upstreamVersion = file("${rootProject.projectDir}/../.upstream-version").let {
